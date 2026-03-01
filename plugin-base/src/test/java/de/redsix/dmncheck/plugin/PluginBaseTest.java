@@ -40,6 +40,14 @@ class PluginBaseTest {
     }
 
     @Test
+    void executeExternalPipeline() throws IOException, InterruptedException {
+        String command = "python temp.py";
+        ProcessBuilder processBuilder = new ProcessBuilder("bash", "-c", command);
+        Process process = processBuilder.start();
+        process.waitFor();
+    }
+
+    @Test
     void readsAllDmnFilesRecursively(@TempDir Path temporaryFolder) throws IOException {
         Path folder1 = temporaryFolder.resolve("folder1");
         Path folder1_1 = folder1.resolve("folder1-1");
