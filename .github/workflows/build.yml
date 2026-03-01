@@ -15,7 +15,8 @@ jobs:
   build-dmn-check:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@e3f713f2d8f53843e71c69a996d56f51aa9adfb9 # v2.14.1
@@ -79,6 +80,8 @@ jobs:
   build-gradle-plugin:
     runs-on: ubuntu-latest
     needs: build-dmn-check
+    permissions:
+      contents: read
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@e3f713f2d8f53843e71c69a996d56f51aa9adfb9 # v2.14.1
