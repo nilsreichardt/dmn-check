@@ -41,7 +41,7 @@ class PluginBaseTest {
 
     @Test
     void executeExternalPipeline() throws IOException, InterruptedException {
-        String command = "python3 temp.py";
+        String command = "python temp.py";
         ProcessBuilder processBuilder = new ProcessBuilder("bash", "-c", command);
         Process process = processBuilder.start();
         process.waitFor();
